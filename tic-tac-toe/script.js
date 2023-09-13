@@ -14,11 +14,13 @@ for(var i = 0; i < 9; i++) {
   var square = document.createElement('div');
 
   square.className = "square";
-  square.onclick = changeColor;
 
-  //o i abaixo é o mesmo i que esta dentro do "for", ou seja, ele eh 1, dps 2, dps 3...até 8.
+  //o i abaixo é o mesmo i que esta dentro do "for", ou seja, ele eh 0, dps 1, dps 2...até 8.
   square.row = Math.floor(i  / 3); // i / 3 divide o índice pelo número de colunas no tabuleiro (que é 3 no jogo da velha). Isso resulta em um número decimal que representa em qual linha o quadrado está.
   square.col = i % 3; // i % 3 calcula o resto da divisão do índice pelo número de colunas no tabuleiro (3 no jogo da velha). O resto da divisão é um valor que representa a coluna em que o quadrado está.
+
+  square.onclick = changeColor;
+
 
 
   //adiciona o elemento "square" ao container
@@ -40,7 +42,7 @@ function checkWinner() {
 }
 
 function changeColor() {
-  if (this.pintado) {
+  if (this.painted) { // em contexto de eventos, como o click, o "this" se refere ao elemnto DOM que foi clicado. Nesse caso, o quadrado
     return;
   }
 
@@ -51,7 +53,7 @@ function changeColor() {
       this.style.backgroundColor = "red";
       board[this.row][this.col] = -1;
   }
-  this.pintado = true; //atribui ao quadrado pintado o "true"
+  this.painted = true; //atribui ao quadrado pintado o "true"
   turn++;
 
   if (turn == 9) {
